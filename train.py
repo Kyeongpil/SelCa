@@ -8,7 +8,7 @@ from time import time
 import numpy as np
 import torch
 import torch.nn as nn
-from torch.optim import Adam
+from torch.optim import AdamW
 import ujson as json
 from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from scipy.sparse import dok_matrix
@@ -37,7 +37,7 @@ class Recommender(object):
 
         self._net = SelCa(self._num_users, self._num_items, args).to(self.device)
 
-        self._optimizer = Adam(self._net.parameters(), weight_decay=args.l2, lr=args.learning_rate)
+        self._optimizer = AdamW(self._net.parameters(), weight_decay=args.l2, lr=args.learning_rate)
         self.scheduler = StepLR(self._optimizer, step_size=args.decay_step, gamma=args.lr_decay)
 
         train_dataset = SelCaDataset(train, num_neg_samples=args.neg_samples)
@@ -238,8 +238,8 @@ if __name__ == '__main__':
     args = parser.parse_args()
     print(args)
 
-    args.train_root = f'datasets/{args.train_data}/test/train.txt'
-    args.test_root = f'datasets/{args.train_data}/test/test.txt'
+    args.train_root = f'datasets/{args.train_data}/validation/train.txt'
+    args.test_root = f'datasets/{args.train_data}/validation/test.txt'
     
     # set seed
     set_seed(args.seed, cuda=args.use_cuda)

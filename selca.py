@@ -116,7 +116,7 @@ class PositionwiseFeedForward(nn.Module):
 
     def forward(self, x):
         residual = x
-        output = self.w_2(F.relu(self.w_1(x)))
+        output = self.w_2(F.gelu(self.w_1(x)))
         output = self.dropout(output)
         output = self.layer_norm(output + residual)
         return output
