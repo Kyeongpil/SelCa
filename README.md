@@ -2,19 +2,19 @@
 
 ## PyTorch implementation of the sequential recommender system (SelCa)
 This repository is PyTorch implementation of [Recommender System Using Sequential and Global Preference via Attention Mechanism and Topic Modeling](https://dl.acm.org/doi/abs/10.1145/3357384.3358054).
+
 I found a minor issue related attention networks in the original codes and fix it.
+
 In addition, I adopted AdamW optimizer and GELU activation function and additionally add dropout layer for the content vector v<sub>content</sub>.
+
 The results for MovieLens (ml1m) are slightly better than those of the original paper.
+
 
 ## Model Overview
 ![model](images/model.PNG)
 
 The model can consider both global information from the entire user-item interactions and sequential information, e.g. items that the user recently purchased.
 
-## Performance
-![performance](images/performance.PNG)
-
-Our model outperforms other baseline models on two public datasets - MovieLens 1M and Gowalla.
 
 ## Category Embedding via Topic Modeling
 ![category_embedding](images/topic_recommend.PNG)
@@ -43,7 +43,7 @@ See the details in build_lda_probs function in train.py.
 The training LDA may take more than 10 minutes. If you reduce the time for training LDA, than you can decrease max_iter in `lda = LatentDirichletAllocation(...)`.
 
 
-## Hyperparameter
+## Results and Hyperparameter settings
 I'll share results corresponding to the changed hyperparamter settings after searching the optimal hyperparameter settings.
 
 
