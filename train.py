@@ -157,6 +157,7 @@ def build_data(args):
         print("LDA training process finished!")
         
         ### calculate train_probs
+        ### This process may takes a lot of memories. Therefore, we apply batch processing 
         n_sequences = train.sequences.sequences.shape[0]
         train_probs = np.zeros((n_sequences, args.topic_num))
         
